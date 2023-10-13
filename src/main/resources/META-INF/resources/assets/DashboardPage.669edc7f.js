@@ -1,0 +1,1 @@
+import{Q as a}from"./QPage.ab9a8eee.js";import{_ as e,C as t,D as r,E as o,I as s}from"./index.2e078092.js";import"./render.3c892917.js";const c={};function p(n,_,d,f,i,m){return t(),r(a,{padding:""},{default:o(()=>[s(" RAHSGFDHGASFDHA ")]),_:1})}var D=e(c,[["render",p]]);export{D as default};
