@@ -2,14 +2,17 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
     :href="link"
+    class="sidebar-menu-item"
   >
     <q-item-section
       v-if="icon"
       avatar
     >
-    <q-icon :name="icon" class="text-primary" />
+      <img
+        :src="icon"
+        class="q-pa-sm sidebar-menu-icon"
+      />
 
     </q-item-section>
 
@@ -21,7 +24,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import {defineComponent} from 'vue'
 
 export default defineComponent({
   name: 'EssentialLink',
@@ -44,7 +47,13 @@ export default defineComponent({
     icon: {
       type: String,
       default: ''
-    }
+    },
   }
 })
 </script>
+
+<style>
+.sidebar-menu-item:hover{
+  background-color: #dae24f;
+}
+</style>

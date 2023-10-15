@@ -1,27 +1,29 @@
 package id.co.pln.p2ep.util;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.security.KeyFactory;
-import java.security.PrivateKey;
+import java.math.BigInteger;
+import java.security.*;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
-import java.util.Base64;
-import java.util.HashSet;
-import java.util.Set;
+import java.security.spec.RSAPublicKeySpec;
+import java.util.*;
 
-import id.co.pln.p2ep.model.Role;
+import id.co.pln.p2ep.model.RoleEnum;
 import io.smallrye.jwt.build.Jwt;
 import io.smallrye.jwt.build.JwtClaimsBuilder;
 
 public class TokenUtils {
-    public static String generateToken(String username, Set<Role> roles, Long duration, String issuer) throws Exception {
+    public static String generateToken(String username, RoleEnum roles, Long duration, String issuer) throws Exception {
         String privateKeyLocation = "/privatekey.pem";
         PrivateKey privateKey = readPrivateKey(privateKeyLocation);
 
         JwtClaimsBuilder claimsBuilder = Jwt.claims();
         long currentTimeInSecs = currentTimeInSecs();
 
-        Set<String> groups = new HashSet<>();
-        for (Role role : roles) groups.add(role.toString());
+        Set<String> groups = Collections.singleton(roles.toString());
+//        for (Role role : roles) groups.add(role.toString());
 
         claimsBuilder.issuer(issuer);
         claimsBuilder.subject(username);
@@ -65,4 +67,23 @@ public class TokenUtils {
         long currentTimeMS = System.currentTimeMillis();
         return (int) (currentTimeMS / 1000);
     }
+
+    public static PublicKey readPublicKey(final String pemResName, String modulus, String pubExp) throws
+            IOException, NoSuchAlgorithmException, InvalidKeySpecException{
+        try (InputStream contentIS = TokenUtils.class.getResourceAsStream(pemResName)) {
+            byte[] tmp = new byte[4096];
+            int length = contentIS.read(tmp);
+
+            byte[] encodedBytes = toEncodedBytes(new String(tmp, 0, length, "UTF-8"));
+
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(encodedBytes);
+            KeyFactory kf = KeyFactory.getInstance("RSA");
+
+            RSAPublicKeySpec pubKeySpec = new RSAPublicKeySpec(new BigInteger(modulus, 16),
+                    new BigInteger(pubExp,16));
+            RSAPublicKey key = (RSAPublicKey) kf.generatePublic(pubKeySpec);
+            return key;
+        }
+    }
+
 }

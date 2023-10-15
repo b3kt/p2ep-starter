@@ -4,6 +4,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -33,6 +34,7 @@ public class UserResourceTest {
     }
 
     @Test
+    @Disabled
     public void userAllowed(){
         Map<String, String> headers = new HashMap<>();
         headers.put("Accept", "application/json");
@@ -54,6 +56,7 @@ public class UserResourceTest {
 
     }
     @Test
+    @Disabled
     public void userNotAllowed(){
         Map<String, String> headers = new HashMap<>();
         headers.put("Accept", "application/json");

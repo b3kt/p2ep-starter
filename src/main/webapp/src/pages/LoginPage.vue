@@ -1,12 +1,12 @@
 <template>
   <q-page padding class="bg-secondary flex flex-center">
     <q-card
-      class="my-card"
+      class="my-card q-pa-lg"
     >
       <q-card-section horizontal class="row  justify-between items-start content-start">
         <q-card-section>
           Welcome to
-          <h3 class="text-weight-bold qa-none q-my-none">Sign in</h3>
+          <h4 class="text-weight-bold qa-none q-my-none">Sign in</h4>
         </q-card-section>
         <q-card-section>
           <img
@@ -20,65 +20,76 @@
 
           <q-form
             @submit="onSubmit"
-            @reset="onReset"
             class="q-gutter-md"
           >
-            <div>Label</div>
+            <div>Enter your username or email address</div>
             <q-input
               dense
               outlined
-              v-model="name"
-              label="Your name *"
-              hint="Name and surname"
+              v-model="form.username"
+              label="Username or email address"
               lazy-rules
               :rules="[ val => val && val.length > 0 || 'Please type something']"
             />
 
-            <div>Label</div>
+            <div>Enter your password</div>
             <q-input
               dense outlined
-              type="number"
-              v-model="age"
-              label="Your age *"
+              type="password"
+              v-model="form.password"
+              label="Password"
               lazy-rules
               :rules="[
-          val => val !== null && val !== '' || 'Please type your age',
-          val => val > 0 && val < 100 || 'Please type a real age'
-        ]"
+                  val => val !== null && val !== '' || 'Please type your password'
+                ]"
             />
-
-            <q-toggle v-model="accept" label="I accept the license and terms" />
-
             <div>
-              <q-btn label="Submit" type="submit" color="primary"/>
-              <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+              <q-btn label="Sign in" type="submit" color="blue-7" class="full-width"/>
             </div>
           </q-form>
 
         </div>
-      </q-card-section>
-      <q-card-section>
-        <div class="text-h6">Our Changing Planet</div>
-        <div class="text-subtitle2">by John Doe</div>
-      </q-card-section>
-
-      <q-card-section class="q-pt-none">
-        {{ lorem }}
       </q-card-section>
     </q-card>
   </q-page>
 </template>
 
 <script>
+import { useUserStore } from '../stores/user-store'
+import { watch } from 'vue';
+
 export default {
   name: 'LoginPage',
+  data () {
+    return {
+      form: {
+        username: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    onSubmit () {
+      useUserStore().login(this.form.username, this.form.password, this);
+    }
+  },
+  mounted() {
+    const store = useUserStore();
+    if(store.accessToken !== null && store.userData !== null){
+      this.$router.push("/")
+    }
+  }
 }
 </script>
 
 <style>
-.my-card{
+.my-card {
   width: 480px;
-  height: 480px;
+  height: 540px;
   border-radius: 2em;
+}
+
+.q-btn--rectangle {
+  border-radius: 8px;
 }
 </style>

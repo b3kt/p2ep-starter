@@ -1,12 +1,19 @@
 <template>
-  <q-page padding>
-    <!-- content -->
-    RAHSGFDHGASFDHA
+  <q-page>
+    <AppSubLayout>
+      <div class="q-pa-lg">
+
+      </div>
+    </AppSubLayout>
   </q-page>
 </template>
 
 <script>
+import AppSubLayout from "components/AppSubLayout.vue";
 export default {
-  // name: 'PageName',
+  name: 'DashboardPage',
+  components: {
+    AppSubLayout
+  }
 }
 </script>

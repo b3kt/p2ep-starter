@@ -1,48 +1,14 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header flat bordered class="bg-white text-primary">
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <img
-          alt="Quasar logo"
-          src="~assets/logo.svg"
-          class="q-pa-sm"
-        >
-        <q-toolbar-title class="text-primary text-weight-bolder text-uppercase">
-          Pusat Pengaturan Energi Primer
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-
-        <q-avatar rounded>
-          <img src="https://cdn.quasar.dev/img/avatar.png">
-        </q-avatar>
-
-      </q-toolbar>
-    </q-header>
+    <AppHeader @toggle-menu="toggleLeftDrawer()" />
 
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-abov
       mini
-      bordered
+      :mini-width="100"
+      class="flex vertical-middle"
     >
-      <q-space style="height: 70px"/>
-      <q-list>
-        <q-item-label
-          header
-        >
-          Menu
-        </q-item-label>
-
+      <q-list class="q-my-auto">
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
@@ -60,38 +26,38 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import AppHeader from "components/AppHeader.vue";
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
-    iconUrl: '~assets/home.svg'
+    title: 'Home',
+    caption: 'Home',
+    link: '/#/',
+    icon: '/icons/home.svg'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: 'Monitoring',
+    caption: 'Monitoring',
+    link: '/#/dashboard',
+    icon: '/icons/monitor.svg'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    title: 'Trophy',
+    caption: 'Trophy',
+    link: '/#/trophy',
+    icon: '/icons/trophy.svg'
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    title: 'Notification',
+    caption: 'notification',
+    link: '/#/notification',
+    icon: '/icons/bell.svg'
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+    title: 'Setting',
+    caption: 'setting',
+    link: '/#/settings',
+    icon: '/icons/gear.svg'
   }
 ]
 
@@ -99,6 +65,7 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
+    AppHeader,
     EssentialLink
   },
 
@@ -109,6 +76,7 @@ export default defineComponent({
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
+        console.log(leftDrawerOpen.value)
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
     }
