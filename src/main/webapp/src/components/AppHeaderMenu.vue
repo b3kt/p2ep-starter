@@ -4,7 +4,7 @@
       <div class="text-capitalize text-weight-bold">{{ session.userData.name }}</div>
     </div>
     <q-avatar class="col">
-      <img src="https://cdn.quasar.dev/img/avatar4.jpg">
+      <q-img alt="avatar" src="https://cdn.quasar.dev/img/avatar4.jpg"/>
       <q-menu :offset="[0,25]" >
         <div class="row no-wrap q-pa-md">
           <div class="column">
@@ -33,7 +33,7 @@
 
           <div class="column items-center">
             <q-avatar size="72px">
-              <img src="https://cdn.quasar.dev/img/avatar4.jpg">
+              <q-img alt="avatar" src="https://cdn.quasar.dev/img/avatar4.jpg"/>
             </q-avatar>
 
             <div class="text-subtitle1 q-mt-md q-mb-xs">John Doe</div>

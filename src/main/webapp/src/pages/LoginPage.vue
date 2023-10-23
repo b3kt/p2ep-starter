@@ -55,12 +55,11 @@
 </template>
 
 <script>
-import { useUserStore } from '../stores/user-store'
-import { watch } from 'vue';
+import {useUserStore} from 'stores/user-store'
 
 export default {
   name: 'LoginPage',
-  data () {
+  data() {
     return {
       form: {
         username: '',
@@ -69,13 +68,13 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
+    onSubmit() {
       useUserStore().login(this.form.username, this.form.password, this);
     }
   },
   mounted() {
     const store = useUserStore();
-    if(store.accessToken !== null && store.userData !== null){
+    if (store.accessToken !== null && store.userData !== null) {
       this.$router.push("/")
     }
   }
@@ -87,9 +86,5 @@ export default {
   width: 480px;
   height: 540px;
   border-radius: 2em;
-}
-
-.q-btn--rectangle {
-  border-radius: 8px;
 }
 </style>

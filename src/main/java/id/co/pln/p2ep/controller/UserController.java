@@ -4,12 +4,7 @@ import id.co.pln.p2ep.entity.User;
 import id.co.pln.p2ep.model.UserRequest;
 import id.co.pln.p2ep.repository.UserRepository;
 import id.co.pln.p2ep.service.UserService;
-import org.apache.http.HttpHeaders;
-import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
-import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
 

@@ -9,7 +9,7 @@
       v-if="icon"
       avatar
     >
-      <img
+      <q-img alt="icon"
         :src="icon"
         class="q-pa-sm sidebar-menu-icon"
       />

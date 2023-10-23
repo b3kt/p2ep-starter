@@ -1,20 +1,15 @@
 package id.co.pln.p2ep.exception;
 
+import lombok.Getter;
+
+@Getter
 public class ErrorMessage {
 
     private String message;
     private Boolean status;
 
-    public String getMessage() {
-        return message;
-    }
-
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public Boolean getStatus() {
-        return status;
     }
 
     public void setStatus(Boolean status) {

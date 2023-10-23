@@ -7,5 +7,5 @@ public enum CategoryEnum {
     GAS_PIPA,
     GAS_LNG,
     FUEL_MIX,
-    DECARBONIZATION;
+    DECARBONIZATION
 }

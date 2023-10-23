@@ -3,6 +3,7 @@ package id.co.pln.p2ep.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
@@ -37,8 +38,8 @@ public class TokenUtils {
     public static PrivateKey readPrivateKey(final String pemResName) throws Exception {
         try (InputStream contentIS = TokenUtils.class.getResourceAsStream(pemResName)) {
             byte[] tmp = new byte[4096];
-            int length = contentIS.read(tmp);
-            return decodePrivateKey(new String(tmp, 0, length, "UTF-8"));
+            int length = Objects.requireNonNull(contentIS).read(tmp);
+            return decodePrivateKey(new String(tmp, 0, length, StandardCharsets.UTF_8));
         }
     }
 
@@ -72,17 +73,16 @@ public class TokenUtils {
             IOException, NoSuchAlgorithmException, InvalidKeySpecException{
         try (InputStream contentIS = TokenUtils.class.getResourceAsStream(pemResName)) {
             byte[] tmp = new byte[4096];
-            int length = contentIS.read(tmp);
+            int length = Objects.requireNonNull(contentIS).read(tmp);
 
-            byte[] encodedBytes = toEncodedBytes(new String(tmp, 0, length, "UTF-8"));
+            byte[] encodedBytes = toEncodedBytes(new String(tmp, 0, length, StandardCharsets.UTF_8));
 
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(encodedBytes);
             KeyFactory kf = KeyFactory.getInstance("RSA");
 
             RSAPublicKeySpec pubKeySpec = new RSAPublicKeySpec(new BigInteger(modulus, 16),
                     new BigInteger(pubExp,16));
-            RSAPublicKey key = (RSAPublicKey) kf.generatePublic(pubKeySpec);
-            return key;
+            return kf.generatePublic(pubKeySpec);
         }
     }
 

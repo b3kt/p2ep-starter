@@ -20,7 +20,8 @@ public class Content extends PanacheEntity {
     private String name;
     private String description;
     private String code;
-    private CategoryEnum categoryEnum;
+    private CategoryEnum category;
     private Boolean status;
+    private String url;
 
 }

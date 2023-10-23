@@ -17,7 +17,6 @@ import id.co.pln.p2ep.util.TokenUtils;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpHeaders;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 
@@ -63,7 +62,7 @@ public class AuthenticationController {
     public Response me(@HeaderParam("authorization") String token) {
 
         if (StringUtils.startsWith(token, "Bearer")) {
-            Claims claims = passwordEncoder.getClaimsFromToken(token.substring(7, token.length()));
+            Claims claims = passwordEncoder.getClaimsFromToken(token.substring(7));
             log.info("{}", claims);
             User user = userRepository.findByUsername(claims.getSubject());
             return Response.ok(user).build();

@@ -5,7 +5,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', meta: { requiresAuth:true }, component: () => import('pages/IndexPage.vue') },
-      { path: 'dashboard', meta: { requiresAuth:true }, component: () => import('pages/DashboardPage.vue') }
+      { path: 'dashboard/:category', meta: { requiresAuth:true }, component: () => import('pages/DashboardPage.vue'), props: true }
     ]
   },
   {

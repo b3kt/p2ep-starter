@@ -10,9 +10,9 @@ import java.util.Set;
 
 public abstract class BaseController {
 
-    protected ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    protected Validator validator = factory.getValidator();
-    protected ObjectMapper objectMapper = new ObjectMapper();
+    protected final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    protected final Validator validator = factory.getValidator();
+    protected final ObjectMapper objectMapper = new ObjectMapper();
 
     public boolean isValid(Object object){
         Set<ConstraintViolation<Object>> violations = validator.validate(object);

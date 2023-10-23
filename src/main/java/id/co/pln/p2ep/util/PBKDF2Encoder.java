@@ -17,15 +17,20 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 @RequestScoped
 @Slf4j
 public class PBKDF2Encoder {
-    @ConfigProperty(name = "id.co.pln.p2ep.password.secret")  private String secret;
-    @ConfigProperty(name = "id.co.pln.p2ep.password.iteration")  private Integer iteration;
-    @ConfigProperty(name = "id.co.pln.p2ep.password.keylength")  private Integer keylength;
-    @ConfigProperty(name = "id.co.pln.p2ep.password.modulus")  private String modulus;
-    @ConfigProperty(name = "id.co.pln.p2ep.password.pubExp")  private String pubExp;
+    @ConfigProperty(name = "id.co.pln.p2ep.password.secret")
+    String secret;
+    @ConfigProperty(name = "id.co.pln.p2ep.password.iteration")
+    Integer iteration;
+    @ConfigProperty(name = "id.co.pln.p2ep.password.keylength")
+    Integer keylength;
+    @ConfigProperty(name = "id.co.pln.p2ep.password.modulus")
+    String modulus;
+    @ConfigProperty(name = "id.co.pln.p2ep.password.pubExp")
+    String pubExp;
 
 
     /**
-     * More info (https://www.owasp.org/index.php/Hashing_Java) 404 :(
+     * More info (<a href="https://www.owasp.org/index.php/Hashing_Java">...</a>) 404 :(
      * @param cs password
      * @return encoded password
      */

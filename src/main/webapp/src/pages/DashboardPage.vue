@@ -10,6 +10,7 @@
 
 <script>
 import AppSubLayout from "components/AppSubLayout.vue";
+
 export default {
   name: 'DashboardPage',
   components: {
